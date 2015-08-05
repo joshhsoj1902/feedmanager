@@ -28,6 +28,9 @@ define([
 					case "home":
 						this.app.showHome();
 						break;
+					case "feed":
+						this.app.showButton();
+						break;
 				}
 			}
 		});

@@ -8,5 +8,11 @@
 			"type": "mock",
 			"url": "file:./sampleUsers.db"
 		}
+	},
+	"reddit": {
+		"app_id": "",
+		"app_secret": "",
+		"bot_username": "",
+		"bot_password": ""
 	}
 }

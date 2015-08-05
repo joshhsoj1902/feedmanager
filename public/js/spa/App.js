@@ -4,10 +4,11 @@ define([
 	"spa/Hello",
 	"spa/Login"
 	], 
-	function(Layout, Menu, Hello, Login){
+	function(Layout, Menu, Hello, Login,FeedPage){
 	var App = Backbone.Marionette.Application.extend({
 		init: function(){
 			this.layout = new Layout();
+			//this.feedPage = new FeedPage();
 			this.mainRegion.show(this.layout);
 			this.layout.menu.show(new Menu({
 				app: this
@@ -22,6 +23,11 @@ define([
 		showHome: function(){
 			this.layout.content.show(new Hello());
 		},
+		//showFeed: function(){
+		//	this.layout.content.show(new FeedPage({
+		//		app: this
+		//	}));
+		//},
 		login: function(username, password, cbError, cbSuccess){
 			var app = this,
 				rnd = Math.random() * 1000,

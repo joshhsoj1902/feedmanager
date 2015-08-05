@@ -2,6 +2,7 @@ var config = require("./config.json"),
 	express = require("express"),
 	routes = require("./routes.js"),
 	dbs = require("./libs/connectDbs.js"),
+    feedManager = require("./components/feed/feedManager.js"),
 	app = express();
 
 config.server.port = process.env.PORT || config.server.port;
@@ -40,4 +41,9 @@ dbs.connect(config.dbs, function(errs, clients){
 		app.listen(config.server.port);
 		console.log("App listening on port: " + config.server.port);
 	}
+});
+
+
+app.get('/rss',function(req, res) {
+    feedManager.generateFeed(req,res);
 });
