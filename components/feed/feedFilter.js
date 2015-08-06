@@ -8,6 +8,7 @@
 						console.log("Remove " + "("+ posts[key].score+")"+ posts[key].title);
 						posts.splice(key,1);
 						continue;
+						
 					}
 			    }
 				key++;
