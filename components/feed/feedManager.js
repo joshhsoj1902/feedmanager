@@ -57,9 +57,9 @@
 			//TODO: change this to be webapp authenticated instead of script authenticated (NEED DB) http://www.reddit.com/r/rawjs/wiki/documentation
 			
 			reddit.auth({"username": config.reddit.bot_username, "password": config.reddit.bot_password}, function(err, response) {
-    			if(err) {
-        			console.log("Unable to authenticate user: " + err);
-    			} else {
+				if(err) {
+					console.log("Unable to authenticate user: " + err);
+				} else {
 					console.log("AUTHENTICATED");
 					
 					feedHeader.feedDetails.title 		= "/r/"+feedHeader.feedSubReddit+"(Top:day)";
@@ -88,18 +88,18 @@
 						console.log(response.children[1]);
 						
 						for(var key in response.children) {
-					    if (response.children.hasOwnProperty(key)){
-					        var outputPost = {
-				         		"title":		response.children[key].data.title,
-				         		"url":			"https://www.reddit.com" + response.children[key].data.permalink,
-				         		"description":  buildRedditDescription(response.children[key].data),
-				         		"date":			new Date(response.children[key].data.created_utc*1000),
-				         		"image":		response.children[key].data.thumbnail,
-								"author":		response.children[key].data.author,
-								"score":		response.children[key].data.score
-						 	};
+							if (response.children.hasOwnProperty(key)){
+								var outputPost = {
+									"title":		response.children[key].data.title,
+									"url":			"https://www.reddit.com" + response.children[key].data.permalink,
+									"description":  buildRedditDescription(response.children[key].data),
+									"date":			new Date(response.children[key].data.created_utc*1000),
+									"image":		response.children[key].data.thumbnail,
+									"author":		response.children[key].data.author,
+									"score":		response.children[key].data.score
+							};
 							posts.push(outputPost);
-					    }
+						}
 					                
 					}
 					feedManagerLocal.handlePosts(feedHeader,posts,callback);
@@ -120,12 +120,12 @@
 				  // handle any request errors
 				});
 				feedReq.on('response', function (feedRes) {
-				  var stream = this;
+				var stream = this;
 				
-				  if (feedRes.statusCode !== 200) {
-					  return this.emit('error', new Error('Bad status code'));
-				  }
-				  stream.pipe(feedparser);
+				if (feedRes.statusCode !== 200) {
+					return this.emit('error', new Error('Bad status code'));
+					}
+					stream.pipe(feedparser);
 				});
 				
 				
@@ -145,19 +145,19 @@
 					
 					var meta = this.meta;
 					
-					feedHeader.feedDetails.title 		= meta.title;
-					feedHeader.feedDetails.description 	= meta.description;
-					feedHeader.feedDetails.link 		= meta.link;
-					feedHeader.feedDetails.xmlurl 		= meta.xmlurl;
-					feedHeader.feedDetails.date 		= meta.date;
-					feedHeader.feedDetails.pubdate 		= meta.pubdate;
+					feedHeader.feedDetails.title		= meta.title;
+					feedHeader.feedDetails.description	= meta.description;
+					feedHeader.feedDetails.link			= meta.link;
+					feedHeader.feedDetails.xmlurl		= meta.xmlurl;
+					feedHeader.feedDetails.date			= meta.date;
+					feedHeader.feedDetails.pubdate		= meta.pubdate;
 					feedHeader.feedDetails.author.name 	= meta.author;
-					feedHeader.feedDetails.language 	= meta.language;
-					feedHeader.feedDetails.image 		= meta.image;
-					feedHeader.feedDetails.favicon 		= meta.favicon;
-					feedHeader.feedDetails.copyright 	= meta.copyright;
-					feedHeader.feedDetails.generator 	= meta.generator;
-					feedHeader.feedDetails.categories 	= meta.categories;
+					feedHeader.feedDetails.language		= meta.language;
+					feedHeader.feedDetails.image		= meta.image;
+					feedHeader.feedDetails.favicon		= meta.favicon;
+					feedHeader.feedDetails.copyright	= meta.copyright;
+					feedHeader.feedDetails.generator	= meta.generator;
+					feedHeader.feedDetails.categories	= meta.categories;
 					
 					
 			    	while (post = this.read()) {
@@ -170,8 +170,8 @@
 				         "image":		post.image
 						 };
 						posts.push(outputPost);
-	 			   	}
-  				});
+						}
+					});
 			},
 			handlePosts: function(feedHeader,posts,callback){
 				posts = feedFilter.filterPosts(feedHeader,posts);
@@ -191,13 +191,12 @@
 					for(var key in posts) {
 					    if (posts.hasOwnProperty(key)){
 					        feed.addItem({
-					        	title:          posts[key].title,
-					            link:           posts[key].url,
-					            description:    posts[key].description,
-					            date:           posts[key].date
-					        });
-					    }
-					                
+								title:			posts[key].title,
+								link:			posts[key].url,
+								description:	posts[key].description,
+					            date:			posts[key].date
+							});
+						}            
 					}
 				
 					return feed;			
