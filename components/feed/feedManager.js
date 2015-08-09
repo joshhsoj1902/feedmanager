@@ -62,19 +62,19 @@
 				} else {
 					console.log("AUTHENTICATED");
 					
-					feedHeader.feedDetails.title 		= "/r/"+feedHeader.feedSubReddit+"(Top:day)";
-					//feedHeader.feedDetails.description 	= meta.description;
-					feedHeader.feedDetails.link 		= "https://www.reddit.com/r/"+ feedHeader.feedSubReddit;
-					//feedHeader.feedDetails.xmlurl 		= meta.xmlurl;
-					feedHeader.feedDetails.date 		= new Date();
-					//feedHeader.feedDetails.pubdate 		= meta.pubdate;
-					//feedHeader.feedDetails.author.name 	= meta.author;
-					//feedHeader.feedDetails.language 	= meta.language;
-					//feedHeader.feedDetails.image 		= meta.image;
-					feedHeader.feedDetails.favicon 		= "reddit.com/favicon.ico";
-					//feedHeader.feedDetails.copyright 	= meta.copyright;
-					//feedHeader.feedDetails.generator 	= meta.generator;
-					//feedHeader.feedDetails.categories 	= meta.categories;
+					feedHeader.feedDetails.title		= "/r/"+feedHeader.feedSubReddit+"(Top:day)";
+					//feedHeader.feedDetails.description	= meta.description;
+					feedHeader.feedDetails.link			= "https://www.reddit.com/r/"+ feedHeader.feedSubReddit;
+					//feedHeader.feedDetails.xmlurl			= meta.xmlurl;
+					feedHeader.feedDetails.date			= new Date();
+					//feedHeader.feedDetails.pubdate		= meta.pubdate;
+					//feedHeader.feedDetails.author.name	= meta.author;
+					//feedHeader.feedDetails.language		= meta.language;
+					//feedHeader.feedDetails.image			= meta.image;
+					feedHeader.feedDetails.favicon		= "reddit.com/favicon.ico";
+					//feedHeader.feedDetails.copyright		= meta.copyright;
+					//feedHeader.feedDetails.generator		= meta.generator;
+					//feedHeader.feedDetails.categories		= meta.categories;
 					
 					var options = ({
 						r:feedHeader.feedSubReddit,
