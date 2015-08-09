@@ -104,7 +104,7 @@
 					}
 					feedManagerLocal.handlePosts(feedHeader,posts,callback);
 					});
-    			}
+				}
 				
 			});
 		},
@@ -151,7 +151,7 @@
 					feedHeader.feedDetails.xmlurl		= meta.xmlurl;
 					feedHeader.feedDetails.date			= meta.date;
 					feedHeader.feedDetails.pubdate		= meta.pubdate;
-					feedHeader.feedDetails.author.name 	= meta.author;
+					feedHeader.feedDetails.author.name	= meta.author;
 					feedHeader.feedDetails.language		= meta.language;
 					feedHeader.feedDetails.image		= meta.image;
 					feedHeader.feedDetails.favicon		= meta.favicon;
@@ -160,7 +160,7 @@
 					feedHeader.feedDetails.categories	= meta.categories;
 					
 					
-			    	while (post = this.read()) {
+					while (post = this.read()) {
 											
 						var outputPost = {
 				         "title":		post.title,
@@ -221,11 +221,11 @@
 							"title":          "Feed Manager",
 							"description":    "",
 							"link":           "",
-			 					author: {
-					    			"name":       "John Doe",
-					        		"email":      "",
-					        		"link":       ""
-					       		 }
+							author: {
+									"name":       "John Doe",
+									"email":      "",
+									"link":       ""
+								}
 							},
 							feedType:"",
 							feedLimit:"",
