@@ -8,6 +8,8 @@ var config = require("./config.json"),
 config.server.port = process.env.PORT || config.server.port;
 config.server.public_dir = process.env.PUBLIC_DIR || config.server.public_dir;
 
+console.log("App Starting");
+
 app.configure(function(){
 
 	app.use(express.favicon());
