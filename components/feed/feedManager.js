@@ -36,9 +36,21 @@
 					case "link":
 						htmlContent = "<a href=\"https://reddit.com/" + post.permalink + "\">" + post.permalink + " </a>";
 						break;
+					case "rich:video":
+						htmlContent = post.media_embed.content;
+						//htmlContent = post.secure_media.oembed;
+						console.log("oEmbed: "+post.secure_media.oembed);
+						break;
 					default:
+						htmlContent = "<p>" +
+							"Post Hint: " + post.post_hint +
+							"</br>" +
+							"<a href=\"https://reddit.com/" + post.permalink + "\">" + post.permalink + " </a>" +
+							"</br>" +
+							"<a href=\"" + post.url + "\">" + post.url + " </a>" +
+							"</p>";
 						console.log("Unknown post_hint: "+post.post_hint);
-						htmlContent = post.url;
+						//htmlContent = post.url;
 						break;
 				}
 				
