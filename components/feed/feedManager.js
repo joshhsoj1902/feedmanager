@@ -6,6 +6,9 @@
 		readRedditSubreddit: function(feedHeader,callback){
 			var Rawjs = require('raw.js');
 			var reddit = new Rawjs("User-Agent: webapp:me.joshbryans:v0.1 (by /u/joshhsoj1902)");
+			
+			var htmlEntities = require('entities');
+			
 			var posts = [];
 			
 			//todo: Move these details into the database
@@ -37,11 +40,23 @@
 						htmlContent = "<a href=\"https://reddit.com/" + post.permalink + "\">" + post.permalink + " </a>";
 						break;
 					case "rich:video":
-						htmlContent = post.media_embed.content;
+						//console.log("========RICH VIDEO=========");
+						//console.log("Step 1: " + post.media_embed.content);
+						//console.log("Step 2: " + htmlEntities1.decode(post.media_embed.content));
+						//console.log("Step 3: " + htmlEntities2.decode(post.media_embed.content));
+						//console.log("Step 4: " + htmlEntities3.decodeXML(post.media_embed.content));
+						//console.log("Step 5: " + htmlEntities3.decodeHTML(post.media_embed.content));
+						//console.log("Step 6: " + decodeURI(htmlEntities3.decodeHTML(post.media_embed.content)));
+						//console.log("Step 7: " + decodeURIComponent(htmlEntities3.decodeHTML(post.media_embed.content)));
+						
+						htmlContent =	decodeURIComponent(htmlEntities.decodeHTML(post.secure_media_embed.content));
+						
 						//htmlContent = post.secure_media.oembed;
-						console.log("oEmbed: "+post.secure_media.oembed);
+						//console.log("oEmbed: "+post.secure_media.oembed);
+						//console.log("--------RICH VIDEO----------");
 						break;
 					default:
+						//htmlContent = "<iframe src=\""+post.url+"\"></iframe>";
 						htmlContent = "<p>" +
 							"Post Hint: " + post.post_hint +
 							"</br>" +
@@ -244,6 +259,7 @@
 							feedUrl:""
 							//feedSubReddit:""
 							//feedMinScore:"",
+							//debug
 					};
 
 				//console.log(req.query.testing);
@@ -265,6 +281,10 @@
 		
 				if(typeof req.query.feedLimit !== "undefined"){
 					feedHeader.feedLimit = req.query.feedLimit;
+				}
+				
+				if(typeof req.query.debug !== "undefined"){
+					feedHeader.debug = true;
 				}
 				
 				
