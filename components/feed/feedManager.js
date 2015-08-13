@@ -15,7 +15,7 @@
 			//reddit.setupOAuth2("AcpADATX7mS_Gw", "oLApqeMArfaBTfmvwNjjOGfE9S4");
 			reddit.setupOAuth2(config.reddit.app_id, config.reddit.app_secret);
 			
-			function buildRedditDescription(post){
+			function buildRedditDescription(redditData){
 				var htmlDescription = "";
 				
 				var htmlContent = "";
@@ -24,20 +24,20 @@
 				
 				htmlSubmitted = "<p>" +
 					"Submitted by " +
-					"<a href=\"https://reddit.com/u/" + post.author + "\">" + post.author + "</a>" +
+					"<a href=\"https://reddit.com/u/" + redditData.author + "\">" + redditData.author + "</a>" +
 					" to " +
-					"<a href=\"https://reddit.com/r/" + post.subreddit + "\">" + post.subreddit + "</a>" +
+					"<a href=\"https://reddit.com/r/" + redditData.subreddit + "\">" + redditData.subreddit + "</a>" +
 					"</p>";
 				htmlComments = "<p>" +
-					"<a href=\"https://reddit.com/" + post.permalink + "\"> Comments(" + post.num_comments + ") </a>" +
+					"<a href=\"https://reddit.com/" + redditData.permalink + "\"> Comments(" + redditData.num_comments + ") </a>" +
 					"</p>";
 				
-				switch(post.post_hint){
+				switch(redditData.post_hint){
 					case "image":
-						htmlContent = "<img src="+post.url+">";
+						htmlContent = "<img src="+redditData.url+" width=\"75%\">";
 						break;
 					case "link":
-						htmlContent = "<a href=\"https://reddit.com/" + post.permalink + "\">" + post.permalink + " </a>";
+						htmlContent = "<a href=\"https://reddit.com/" + redditData.permalink + "\">" + redditData.permalink + " </a>";
 						break;
 					case "rich:video":
 						//console.log("========RICH VIDEO=========");
@@ -49,7 +49,7 @@
 						//console.log("Step 6: " + decodeURI(htmlEntities3.decodeHTML(post.media_embed.content)));
 						//console.log("Step 7: " + decodeURIComponent(htmlEntities3.decodeHTML(post.media_embed.content)));
 						
-						htmlContent =	decodeURIComponent(htmlEntities.decodeHTML(post.secure_media_embed.content));
+						htmlContent =	decodeURIComponent(htmlEntities.decodeHTML(redditData.secure_media_embed.content));
 						
 						//htmlContent = post.secure_media.oembed;
 						//console.log("oEmbed: "+post.secure_media.oembed);
@@ -57,14 +57,20 @@
 						break;
 					default:
 						//htmlContent = "<iframe src=\""+post.url+"\"></iframe>";
-						htmlContent = "<p>" +
-							"Post Hint: " + post.post_hint +
+						
+						if (typeof redditData.secure_media_embed !== "undefined") {
+							//If reddit gave us this section we can embed it!
+							htmlContent =	decodeURIComponent(htmlEntities.decodeHTML(redditData.secure_media_embed.content));
+						} else {
+							htmlContent = "<p>" +
+							"Post Hint: " + redditData.post_hint +
 							"</br>" +
-							"<a href=\"https://reddit.com/" + post.permalink + "\">" + post.permalink + " </a>" +
+							"<a href=\"https://reddit.com/" + redditData.permalink + "\">" + redditData.permalink + " </a>" +
 							"</br>" +
-							"<a href=\"" + post.url + "\">" + post.url + " </a>" +
+							"<a href=\"" + redditData.url + "\">" + redditData.url + " </a>" +
 							"</p>";
-						console.log("Unknown post_hint: "+post.post_hint);
+						}
+					
 						//htmlContent = post.url;
 						break;
 				}
@@ -73,9 +79,20 @@
 					htmlSubmitted +
 					htmlComments +
 					"</br>" +
-					"<p>Score: "+post.score+"</p>" +
+					"<p>Score: "+redditData.score+"</p>" +
 					htmlContent +
 					"</div>";
+					
+				if (feedHeader.debug === true) {
+					htmlDescription = htmlDescription +
+					"<div>" +
+					"<p>" +
+					"Post Hint: " + redditData.post_hint +
+					"</p>" +
+					"<p>" +
+					JSON.stringify(redditData, null, 2) + 
+					"</p></div>";
+				}
 				
 				
 				return htmlDescription;
