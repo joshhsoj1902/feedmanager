@@ -1,8 +1,8 @@
 (function(){
-	var feedFilter 		= require("./feedFilter.js");
-	var rssHandler 		= require("./rssHandler.js");
-	var redditHandler 	= require("./redditHandler.js");
-	//var config 			= require("./../../config.json");
+	var feedFilter		= require("./feedFilter.js");
+	var rssHandler		= require("./rssHandler.js");
+	var redditHandler	= require("./redditHandler.js");
+	//var config			= require("./../../config.json");
 	
 	
 	var feedManagerLocal = {
