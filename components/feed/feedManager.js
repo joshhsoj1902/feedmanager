@@ -93,9 +93,10 @@
 				
 				if(typeof req.query.debug !== "undefined"){
 					feedHeader.debug = true;
+					if (feedHeader.debug === true) {
+						console.log("DEBUG ON");
+					}
 				}
-				
-				
 				
 				if (feedHeader.feedType === "") {
 					//Just doing this for now to make testing easier
