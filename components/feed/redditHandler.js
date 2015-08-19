@@ -72,6 +72,7 @@
 			var postTitle = "";
 			
 			if (redditData.over_18 === true) {
+				//TODO: Could a red style be added here?
 				postTitle += "(NSFW) ";
 			}
 			postTitle += redditData.title;
@@ -80,7 +81,8 @@
 		},
 		buildDescription: function(feedHeader,redditData){
 			
-			var htmlEntities = require('entities');
+			var htmlEntities	= require('entities');
+			//var Handlebars		= require('handlebars');
 			
 			var htmlDescription = "";
 				
@@ -141,14 +143,52 @@
 					"</div>";
 					
 				if (feedHeader.debug === true) {
-					htmlDescription = htmlDescription +
-					"<div>" +
+					
+					
+					var expresshbs  = require('express-handlebars');
+					var handlebars = expresshbs.create({
+    					// Specify helpers which are only registered on this instance. 
+    					helpers: {
+        					foo: function () { return 'FOO!'; },
+        					bar: function () { return 'BAR!'; }
+    					}
+					});
+					
+					//console.log(__dirname);
+					
+					var fs = require('fs');
+					var file = fs.readFileSync(__dirname + "/templates/collapse.html", "utf8");
+					//console.log(file);
+					
+					
+					var source   = file;
+					var template  = handlebars.handlebars.compile(source);
+					
+					
+					var htmlDebug = "<div>" +
 					"<p>" +
 					"Post Hint: " + redditData.post_hint +
 					"</p>" +
 					"<p>" +
 					JSON.stringify(redditData, null, 2) + 
 					"</p></div>";
+					
+					
+					var context = {title: "Debug", content: htmlDebug};
+					var html    = template(context);
+					
+					//console.log(html);
+					
+					htmlDescription += html;
+					
+					// htmlDescription = htmlDescription +
+					// "<div>" +
+					// "<p>" +
+					// "Post Hint: " + redditData.post_hint +
+					// "</p>" +
+					// "<p>" +
+					// JSON.stringify(redditData, null, 2) + 
+					// "</p></div>";
 				}
 				
 				
