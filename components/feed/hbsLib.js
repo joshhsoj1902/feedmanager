@@ -22,6 +22,7 @@
 					break;
 
 				default:
+					templateLocation = __dirname + "/templates/"+templateName+".html"
 					break;
 			}
 			

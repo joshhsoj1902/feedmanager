@@ -88,18 +88,28 @@
 			var htmlDescription = "";
 
 			var htmlContent = "";
-			var htmlSubmitted = "";
-			var htmlComments = "";
+			// var htmlSubmitted = "";
+			// var htmlComments = "";
 
-			htmlSubmitted = "<p>" +
-			"Submitted by " +
-			"<a href=\"https://reddit.com/u/" + redditData.author + "\">" + redditData.author + "</a>" +
-			" to " +
-			"<a href=\"https://reddit.com/r/" + redditData.subreddit + "\">" + redditData.subreddit + "</a>" +
-			"</p>";
-			htmlComments = "<p>" +
-			"<a href=\"https://reddit.com/" + redditData.permalink + "\"> Comments(" + redditData.num_comments + ") </a>" +
-			"</p>";
+			var context = {
+				author: redditData.author,
+				subreddit: redditData.subreddit,
+				permalink: redditData.permalink,
+				num_comments: redditData.num_comments,
+				score: redditData.score
+			};
+
+			var htmlHeader = hbsLib.buildHandlebarsHTML("redditPostHeader", context);
+			
+			// htmlSubmitted = "<p>" +
+			// "Submitted by " +
+			// "<a href=\"https://reddit.com/u/" + redditData.author + "\">" + redditData.author + "</a>" +
+			// " to " +
+			// "<a href=\"https://reddit.com/r/" + redditData.subreddit + "\">" + redditData.subreddit + "</a>" +
+			// "</p>";
+			// htmlComments = "<p>" +
+			// "<a href=\"https://reddit.com/" + redditData.permalink + "\"> Comments(" + redditData.num_comments + ") </a>" +
+			// "</p>";
 
 			switch (redditData.post_hint) {
 				case "image":
@@ -136,35 +146,11 @@
 			}
 
 			htmlDescription = "<div>" +
-			htmlSubmitted +
-			htmlComments +
-			"</br>" +
-			"<p>Score: " + redditData.score + "</p>" +
+			htmlHeader +
 			htmlContent +
 			"</div>";
 
 			if (feedHeader.debug === true) {
-
-
-				// var expresshbs = require('express-handlebars');
-				// var handlebars = expresshbs.create({
-				// 	// Specify helpers which are only registered on this instance. 
-				// 	helpers: {
-				// 		foo: function () { return 'FOO!'; },
-				// 		bar: function () { return 'BAR!'; }
-				// 	}
-				// });
-					
-				// //console.log(__dirname);
-					
-				// var fs = require('fs');
-				// var file = fs.readFileSync(__dirname + "/templates/collapse.html", "utf8");
-				// //console.log(file);
-					
-					
-				// var source = file;
-				// var template = handlebars.handlebars.compile(source);
-
 
 				var htmlDebug = "<div>" +
 					"<p>" +
@@ -175,23 +161,11 @@
 					"</p></div>";
 
 
-				var context = { title: "Debug", content: htmlDebug };
-				var html = hbsLib.buildHandlebarsHTML("collapse",context);
-				
-				//var html = template(context);
-					
-				//console.log(html);
-					
+				var context = { title: "Debug", content: htmlDebug, id: "debug_" + redditData.id };
+				var html = hbsLib.buildHandlebarsHTML("collapse", context);
+
 				htmlDescription += html;
-					
-				// htmlDescription = htmlDescription +
-				// "<div>" +
-				// "<p>" +
-				// "Post Hint: " + redditData.post_hint +
-				// "</p>" +
-				// "<p>" +
-				// JSON.stringify(redditData, null, 2) + 
-				// "</p></div>";
+
 			}
 
 
