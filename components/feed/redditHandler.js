@@ -161,8 +161,8 @@
 					"</p></div>";
 
 
-				var context = { title: "Debug", content: htmlDebug, id: "debug_" + redditData.id };
-				var html = hbsLib.buildHandlebarsHTML("collapse", context);
+				var debugContext = { title: "Debug", content: htmlDebug, id: "debug_" + redditData.id };
+				var html = hbsLib.buildHandlebarsHTML("collapse", debugContext);
 
 				htmlDescription += html;
 
