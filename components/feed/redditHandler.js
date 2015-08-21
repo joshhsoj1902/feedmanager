@@ -1,5 +1,6 @@
 (function () {
 	var config = require("./../../config.json");
+	var hbsLib = require("./hbsLib.js");
 
 	var redditHandlerLocal = {
 		readRedditSubreddit: function (feedHeader, cbHandlePosts) {
@@ -145,24 +146,24 @@
 			if (feedHeader.debug === true) {
 
 
-				var expresshbs = require('express-handlebars');
-				var handlebars = expresshbs.create({
-					// Specify helpers which are only registered on this instance. 
-					helpers: {
-						foo: function () { return 'FOO!'; },
-						bar: function () { return 'BAR!'; }
-					}
-				});
+				// var expresshbs = require('express-handlebars');
+				// var handlebars = expresshbs.create({
+				// 	// Specify helpers which are only registered on this instance. 
+				// 	helpers: {
+				// 		foo: function () { return 'FOO!'; },
+				// 		bar: function () { return 'BAR!'; }
+				// 	}
+				// });
 					
-				//console.log(__dirname);
+				// //console.log(__dirname);
 					
-				var fs = require('fs');
-				var file = fs.readFileSync(__dirname + "/templates/collapse.html", "utf8");
-				//console.log(file);
+				// var fs = require('fs');
+				// var file = fs.readFileSync(__dirname + "/templates/collapse.html", "utf8");
+				// //console.log(file);
 					
 					
-				var source = file;
-				var template = handlebars.handlebars.compile(source);
+				// var source = file;
+				// var template = handlebars.handlebars.compile(source);
 
 
 				var htmlDebug = "<div>" +
@@ -175,7 +176,9 @@
 
 
 				var context = { title: "Debug", content: htmlDebug };
-				var html = template(context);
+				var html = hbsLib.buildHandlebarsHTML("collapse",context);
+				
+				//var html = template(context);
 					
 				//console.log(html);
 					
