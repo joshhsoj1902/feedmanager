@@ -23,7 +23,7 @@
 				} else {
 					console.log("AUTHENTICATED");
 
-					feedHeader.feedDetails.title = "/r/" + feedHeader.feedSubReddit + "(Top:day)";
+					feedHeader.feedDetails.title = feedHeader.feedSubReddit + "(Top:day)";
 					//feedHeader.feedDetails.description	= meta.description;
 					feedHeader.feedDetails.link = "https://www.reddit.com/r/" + feedHeader.feedSubReddit;
 					//feedHeader.feedDetails.xmlurl			= meta.xmlurl;
@@ -83,13 +83,10 @@
 		buildDescription: function (feedHeader, redditData) {
 
 			var htmlEntities = require('entities');
-			//var Handlebars		= require('handlebars');
 			
 			var htmlDescription = "";
 
 			var htmlContent = "";
-			// var htmlSubmitted = "";
-			// var htmlComments = "";
 
 			var context = {
 				author: redditData.author,
@@ -100,24 +97,14 @@
 			};
 
 			var htmlHeader = hbsLib.buildHandlebarsHTML("redditPostHeader", context);
-			
-			// htmlSubmitted = "<p>" +
-			// "Submitted by " +
-			// "<a href=\"https://reddit.com/u/" + redditData.author + "\">" + redditData.author + "</a>" +
-			// " to " +
-			// "<a href=\"https://reddit.com/r/" + redditData.subreddit + "\">" + redditData.subreddit + "</a>" +
-			// "</p>";
-			// htmlComments = "<p>" +
-			// "<a href=\"https://reddit.com/" + redditData.permalink + "\"> Comments(" + redditData.num_comments + ") </a>" +
-			// "</p>";
 
 			switch (redditData.post_hint) {
 				case "image":
 					htmlContent = "<img src=" + redditData.url + " width=\"75%\">";
 					break;
-				case "link":
-					htmlContent = "<a href=\"https://reddit.com/" + redditData.permalink + "\">" + redditData.permalink + " </a>";
-					break;
+				//case "link":
+				//	htmlContent = "<a href=\"https://reddit.com/" + redditData.permalink + "\">" + redditData.permalink + " </a>";
+				//	break;
 				default:
 					//htmlContent = "<iframe src=\""+post.url+"\"></iframe>";
 						
@@ -128,17 +115,19 @@
 						//Video
 						htmlContent = decodeURIComponent(htmlEntities.decodeHTML(redditData.media_embed.content));
 						htmlContent = htmlContent.replace(/\"\/\//g, "\"http://");
-					} else if (typeof redditData.selftext_html !== "undefined") {
+					} else if (typeof redditData.selftext_html !== "undefined" && redditData.selftext_html !== null) {
 						//Self Post
 						htmlContent = htmlEntities.decodeHTML(redditData.selftext_html);
 					} else {
-						htmlContent = "<p>" +
-						"Post Hint: " + redditData.post_hint +
-						"</br>" +
-						"<a href=\"https://reddit.com/" + redditData.permalink + "\">" + redditData.permalink + " </a>" +
-						"</br>" +
-						"<a href=\"" + redditData.url + "\">" + redditData.url + " </a>" +
-						"</p>";
+						//htmlContent = "<a href=\"https://reddit.com/" + redditData.permalink + "\">" + redditData.permalink + " </a>";
+						htmlContent = "<a href=\"" + redditData.url + "\">" + redditData.url + " </a>";
+						// htmlContent = "<p>" +
+						// "Post Hint: " + redditData.post_hint +
+						// "</br>" +
+						// "<a href=\"https://reddit.com/" + redditData.permalink + "\">" + redditData.permalink + " </a>" +
+						// "</br>" +
+						// "<a href=\"" + redditData.url + "\">" + redditData.url + " </a>" +
+						// "</p>";
 					}
 					
 					//htmlContent = post.url;
@@ -167,8 +156,6 @@
 				htmlDescription += html;
 
 			}
-
-
 			return htmlDescription;
 		}
 	};
