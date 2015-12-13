@@ -19,13 +19,52 @@
 						}
 					});
 				},
-				read: function(user, cb){
-					var usr = db.kv(user.id);
-					if(!usr){
-						cb(["User not found"]);
-					}else{
-						cb(undefined, usr);
-					}
+				read: function(username, cb){
+					
+					
+					db.query('INSERT INTO log (message) VALUES ($1)', [username], function(err, result) {
+				
+					// handle an error from the query
+					//if(handleError(err)) {return;}
+					console.log("JB2: calllback");
+					// get the total number of visits today (including the current visit)
+					// client.query('SELECT COUNT(date) AS count FROM visit', function(err, result) {
+				
+					// 	// handle an error from the query
+					// 	if(handleError(err)) return;
+				
+					// 	// return the client to the connection pool for other requests to reuse
+					// 	done();
+					// 	res.writeHead(200, {'content-type': 'text/plain'});
+					// 	res.end('You are visitor number ' + result.rows[0].count);
+					// });
+					});
+					
+					var query = db.query("SELECT url_key FROM users WHERE username = $1",[username]);
+					query.on("row", function (row, result) {
+						result.addRow(row);
+					});
+					query.on("end", function (result) {
+						if (result.rowCount = 1) {
+							var user = result.rows[0];
+							console.log(JSON.stringify(result.rows, null, "    "));
+							console.log(user.url_key);
+							
+							cb(undefined, user);
+						} else if (result.rowCount > 1) {
+							cb(["User not found [Reason 2]"]);
+						} else {
+							cb(["User not found"]);
+						}
+						
+					});
+					
+					// var usr = db.kv(user.id);
+					// if(!usr){
+					// 	cb(["User not found"]);
+					// }else{
+					// 	cb(undefined, usr);
+					// }
 				},
 				update: function(user, cb){
 					userModel.validateUpdate(user, function(err, usr){
