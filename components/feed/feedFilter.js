@@ -35,7 +35,6 @@
 				posts = feedFilter.limitNumberOfResults(posts,feedHeader.feedLimit);
 			}
 			else{
-				//temporary 10 feed limit
 				posts = feedFilter.limitNumberOfResults(posts,10);
 			}
 			return posts;
