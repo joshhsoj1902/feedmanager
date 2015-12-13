@@ -125,10 +125,11 @@ module.exports = function(grunt) {
                "public/css/vendor/bootstrap.min.css": ["public/css/vendor/bootstrap.css"]
             }
         }
-    }
+}
 
   });
 
+//  grunt.loadNpmTasks('grunt-compile-handlebars');
   grunt.loadNpmTasks("grunt-contrib-jshint");
   grunt.loadNpmTasks("grunt-contrib-concat");
   grunt.loadNpmTasks("grunt-contrib-uglify");
