@@ -38,7 +38,8 @@
     "handlebars": "*",
     "express-handlebars": "*",
     "everyauth": "*",
-    "raw-body": "*"
+    "raw-body": "*",
+    "bower": "*"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
@@ -56,5 +57,8 @@
   "license": "MIT",
   "engines": {
     "node": ">=0.6"
-  }
+  },
+  "scripts": {
+    "postinstall" : "bower install"
+}
 }

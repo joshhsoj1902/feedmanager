@@ -110,7 +110,9 @@ if ('development' === env) {
 	}
 	});
 
-
+app.get('/rss',function(req, res) {
+    feedManager.generateFeed(req,res);
+});
 
 		routes.load(app);
     
@@ -126,6 +128,4 @@ if ('development' === env) {
                                        failureFlash: true })
       );
 
-app.get('/rss',function(req, res) {
-    feedManager.generateFeed(req,res);
-});
+
