@@ -18,6 +18,9 @@ var config = require("./config.json"),
 config.server.port = process.env.PORT || config.server.port;
 config.server.public_dir = process.env.PUBLIC_DIR || config.server.public_dir;
 
+//var massive = require("massive");
+//var connectionString = "postgres://postgres:admin@localhost/feeds";
+
 console.log("App Starting");
 
 
@@ -64,19 +67,19 @@ console.log("App Starting");
 	app.use(bodyParser.text()); // Allows bodyParser to look at raw text
 	app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // Parse application/vnd.api+json
 	
-	//app.use(cookieParser);
-
-
+	//app.use(cookieParser); //breaks page loading...
 	app.use(session({ 
-	   secret: 'keyboard dogs',
+	   secret: 'keyboarddogs',
        name: 'feed_manager_cookie',
        //store: sessionStore, // connect-mongo session store
        proxy: true,
        resave: true,
        saveUninitialized: true
 	 }));
+     
+//     var massiveInstance = massive.connectSync({connectionString : connectionString}) 
+//     app.set('db', massiveInstance);
 	
-	//Come back to passport once express is working
 	passport = passportauth.init(app);
     app.use(passport.initialize());
     app.use(passport.session());
@@ -129,3 +132,13 @@ app.get('/rss',function(req, res) {
       );
 
 
+function isLoggedIn(req, res, next) {
+
+    // if user is authenticated in the session, carry on 
+        if (req.isAuthenticated()) {
+            return next();
+        }
+        
+    // if they aren't redirect them to the home page
+    res.redirect('/');
+}
