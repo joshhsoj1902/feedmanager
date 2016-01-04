@@ -1,31 +1,12 @@
 (function () {
-    //var //Users = require("../users/index.js"),
-        //User = require("../users/models/user.js"),
-    var    //config = require("./../../config.json"),
-        //dbs = require("../../libs/connectDbs.js"),
-        passport = require('passport'),
-        LocalStrategy = require('passport-local').Strategy;
-        //middlewarize = require("../../libs/APICreator.js");
-    var models = require('../../models/index');
+
+   var  passport = require('passport'),
+        LocalStrategy = require('passport-local').Strategy,
+        models = require('../../models/index');
     module.exports = {
         "init": function (app) {
 
             console.log("Passport 1");
-
-            //var db = app.get('db');
-            
-
-            // dbs.connect(config.dbs, function (errs, clients) {
-            //     var db;
-            //     if (errs) {
-            //         for (db in errs) {
-            //             console.log("Error: db[" + db + "] " + errs[db]);
-            //         }
-            //     } else {
-
-                    //var users = Users.init(clients["feedDB"]);
-                    //var users = Users.init(db);
-
 
                     console.log("Passport 2");
 
@@ -33,14 +14,6 @@
                         function (username, password, done) {
                             console.log("username", username);
                             console.log("password", password);
-                            //User.findOne({ username: username }, function(err, user) {
-                            //  if (err) { return done(err); }
-                            //  if (!user) {
-                            //    return done(null, false, { message: 'Incorrect username.' });
-                            //  }
-                            //  if (!user.validPassword(password)) {
-                            //    return done(null, false, { message: 'Incorrect password.' });
-                            //  }
                             
                             //Log that a user was requested
                             models.Log.create({
@@ -145,32 +118,8 @@
 
     // }));
                     
-                    
-                    console.log("Passport 4");
-
-
-
-                    console.log("Passport 5");
-
-//                    users.api = middlewarize.createAPI(users);
-
-                    console.log("Passport 6");
-
-
-
-                    console.log("Passport 7");
-
-
-                //}
-            //});
-
 
             return passport;
-
         }
-
-
-
-
     };
 } ());
