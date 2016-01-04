@@ -1,6 +1,6 @@
-var fakebook = angular.module('fakebook', ['ngRoute', 'fakebookControllers']);
+var feed = angular.module('feed', ['ngRoute', 'feedControllers']);
 
-fakebook.config(['$routeProvider', '$locationProvider',
+feed.config(['$routeProvider', '$locationProvider',
   function($routeProvider, $locationProvider) {
     $routeProvider.
     when('/home', {
@@ -10,6 +10,10 @@ fakebook.config(['$routeProvider', '$locationProvider',
     when('/account', {
       templateUrl: 'views/account.html',
       controller: 'accountCtrl'
+    }).
+    when('/signup', {
+      templateUrl: 'views/signup.html',
+      controller: 'signupCtrl'
     }).
     otherwise({
       redirectTo: '/home'
