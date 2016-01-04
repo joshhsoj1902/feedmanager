@@ -8,7 +8,7 @@ var config = require("./config.json"),
 	cookieParser = require('cookie-parser'),
 	session = require('express-session'),
 	routes = require("./routes.js"),
-	dbs = require("./libs/connectDbs.js"),
+	//dbs = require("./libs/connectDbs.js"),
     feedManager = require("./components/feed/feedManager.js"),
     passportauth = require("./components/passportauth/index.js"),
     passport = require('passport-google-oauth'),
@@ -18,8 +18,8 @@ var config = require("./config.json"),
 config.server.port = process.env.PORT || config.server.port;
 config.server.public_dir = process.env.PUBLIC_DIR || config.server.public_dir;
 
-//var massive = require("massive");
-//var connectionString = "postgres://postgres:admin@localhost/feeds";
+// var massive = require("massive");
+// var connectionString = "postgres://postgres:admin@localhost/feeds";
 
 console.log("App Starting");
 
@@ -77,8 +77,8 @@ console.log("App Starting");
        saveUninitialized: true
 	 }));
      
-//     var massiveInstance = massive.connectSync({connectionString : connectionString}) 
-//     app.set('db', massiveInstance);
+    //  var massiveInstance = massive.connectSync({connectionString : connectionString});
+    //  app.set('db', massiveInstance);
 	
 	passport = passportauth.init(app);
     app.use(passport.initialize());
@@ -99,19 +99,19 @@ if ('development' === env) {
     }));
 }
 
-    dbs.connect(config.dbs, function(errs, clients){
-	var db;
-	if(errs){
-		for(db in errs){
-			console.log("Error: db[" + db + "] " + errs[db]);
-		}
-	}else{
+    // dbs.connect(config.dbs, function(errs, clients){
+	// var db;
+	// if(errs){
+	// 	for(db in errs){
+	// 		console.log("Error: db[" + db + "] " + errs[db]);
+	// 	}
+	// }else{
 		
 		
-        //passportauth.init(app,clients);
+    //     //passportauth.init(app,clients);
 
-	}
-	});
+	// }
+	// });
 
 app.get('/rss',function(req, res) {
     feedManager.generateFeed(req,res);
