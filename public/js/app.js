@@ -15,6 +15,10 @@ feed.config(['$routeProvider', '$locationProvider',
       templateUrl: 'views/signup.html',
       controller: 'signupCtrl'
     }).
+    when('/profile', {
+      templateUrl: 'views/profile.html',
+      controller: 'profileCtrl'
+    }).
     otherwise({
       redirectTo: '/home'
     });

@@ -12,6 +12,7 @@ var config = require("./config.json"),
     passportauth = require("./components/passportauth/index.js"),
     passport = require('passport-google-oauth'),
 	app = express();
+    var flash = require('connect-flash');
 
 config.server.port = process.env.PORT || config.server.port;
 config.server.public_dir = process.env.PUBLIC_DIR || config.server.public_dir;
@@ -68,6 +69,8 @@ console.log("App Starting");
        resave: true,
        saveUninitialized: true
 	 }));
+     
+     app.use(flash());
 	
 	passport = passportauth.init(app);
     app.use(passport.initialize());
@@ -96,12 +99,27 @@ app.get('/rss',function(req, res) {
 		app.listen(config.server.port);
 		console.log("App listening on port: " + config.server.port);
 
+        // process the signup form
+        app.post('/signup', passport.authenticate('local-signup', {
+            successRedirect : '/profile', // redirect to the secure profile section
+            failureRedirect : '/signup', // redirect back to the signup page if there is an error
+            failureFlash : true // allow flash messages
+        }));
 
-      app.post('/login',
-        passport.authenticate('local', { successRedirect: '/',
-                                       failureRedirect: '/login',
-                                       failureFlash: true })
+        app.post('/login',
+            passport.authenticate('local', { successRedirect: '/',
+                                           failureRedirect: '/login',
+                                           failureFlash: true })
       );
+      
+    //  function isAuthenticated(req,res,next){
+    //     if(req.isAuthenticated())return next();
+    //      res.send(401);
+    //   }
+      
+    //   app.get('/auth/currentuser',isAuthenticated(),function(req,res){
+    //     res.json(req.user);
+    // });
 
 
 function isLoggedIn(req, res, next) {

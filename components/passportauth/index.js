@@ -65,58 +65,99 @@
                     });
                     
                     
-    // // =========================================================================
-    // // LOCAL SIGNUP ============================================================
-    // // =========================================================================
-    // // we are using named strategies since we have one for login and one for signup
-    // // by default, if there was no name, it would just be called 'local'
+    // =========================================================================
+    // LOCAL SIGNUP ============================================================
+    // =========================================================================
+    // we are using named strategies since we have one for login and one for signup
+    // by default, if there was no name, it would just be called 'local'
 
-    // passport.use('local-signup', new LocalStrategy({
-    //     // by default, local strategy uses username and password, we will override with email
-    //     usernameField : 'email',
-    //     passwordField : 'password',
-    //     passReqToCallback : true // allows us to pass back the entire request to the callback
-    // },
-    // function(req, email, password, done) {
+    passport.use('local-signup', new LocalStrategy({
+        // by default, local strategy uses username and password, we will override with email
+        usernameField : 'email',
+        passwordField : 'password',
+        passReqToCallback : true // allows us to pass back the entire request to the callback
+    },
+    function(req, username, password, done) {
 
-    //     // asynchronous
-    //     // User.findOne wont fire unless data is sent back
-    //     process.nextTick(function() {
+        // asynchronous
+        // User.findOne wont fire unless data is sent back
+        process.nextTick(function() {
 
-    //     // find a user whose email is the same as the forms email
-    //     // we are checking to see if the user trying to login already exists
-    //     //User.findOne({ 'local.email' :  email }, function(err, user) {
-    //     Users.read({ 'local.email' :  email }, function(err, user) {
-    //         // if there are any errors, return the error
-    //         if (err)
-    //             return done(err);
+        // find a user whose email is the same as the forms email
+        // we are checking to see if the user trying to login already exists
+        //User.findOne({ 'local.email' :  email }, function(err, user) {
+            
+            
+            
+        models.User.find({
+            where: {
+                 username: username
+                   }
+          }).then(function(user) {
+             if (user) {
+                   return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
+                }else{
+                     // if there is no user with that email
+                    // create the user
+                    
+                    models.User.create({
+                                username: username,
+                                url_key: "NotMonkey"
+                                //newUser.local.password = newUser.generateHash(password);
+                                }).then(function(user) {
+                                    console.log(JSON.stringify(user, null, "    "));
+                                    return done(null, user);
+                            });
+                    // var newUser            = new User();
 
-    //         // check to see if theres already a user with that email
-    //         if (user) {
-    //             return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
-    //         } else {
+                    // // set the user's local credentials
+                    // newUser.local.email    = email;
+                    // newUser.local.password = newUser.generateHash(password);
 
-    //             // if there is no user with that email
-    //             // create the user
-    //             var newUser            = new User();
+                    // // save the user
+                    // newUser.save(function(err) {
+                    //     if (err)
+                    //         throw err;
+                    //     return done(null, newUser);
+                    // });
+                }
+                
+           });
+            
+            
+            //models.User
+        //Users.read({ 'local.email' :  email }, function(err, user) {
+        // models.User.read({ 'local.email' :  email }, function(err, user) {
+        //     // if there are any errors, return the error
+        //     if (err)
+        //         return done(err);
 
-    //             // set the user's local credentials
-    //             newUser.local.email    = email;
-    //             newUser.local.password = newUser.generateHash(password);
+        //     // check to see if theres already a user with that email
+        //     if (user) {
+        //         return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
+        //     } else {
 
-    //             // save the user
-    //             newUser.save(function(err) {
-    //                 if (err)
-    //                     throw err;
-    //                 return done(null, newUser);
-    //             });
-    //         }
+        //         // if there is no user with that email
+        //         // create the user
+        //         var newUser            = new User();
 
-    //     });    
+        //         // set the user's local credentials
+        //         newUser.local.email    = email;
+        //         newUser.local.password = newUser.generateHash(password);
 
-    //     });
+        //         // save the user
+        //         newUser.save(function(err) {
+        //             if (err)
+        //                 throw err;
+        //             return done(null, newUser);
+        //         });
+        //     }
 
-    // }));
+        // });    
+
+        });
+
+    }));
                     
 
             return passport;
