@@ -1,13 +1,13 @@
 {
-  "name": "app-name",
+  "name": "Feed manager",
   "version": "0.0.1",
-  "author": "Picanteverde <picanteverde@gmail.com>",
+  "author": "Josh <@gmail.com>",
   "description": "a simple description",
   "contributors": [
     {
-      "name": "Alejandro Hernandez",
-      "email": "picanteverde@gmail.com",
-      "web": "http://picanteverde.wordpress.com/"
+      "name": "Josh Bryans",
+      "email": "",
+      "web": ""
     }
   ],
   "repository": {
@@ -15,7 +15,6 @@
     "url": "https://github.com/picanteverde/init.git"
   },
   "keywords": [
-    "init",
     "node",
     "app"
   ],
