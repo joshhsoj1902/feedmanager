@@ -27,10 +27,10 @@ feedUI.controller('authCtrl',function($scope,$http,$location,UserService,$timeou
                 console.log("getCurrentUser fail");
                 done(null);
             });
-    };
+    }
     
     function setUser(user){
-        if (typeof user != 'undefined' && user !== null) {
+        if (typeof user !== 'undefined' && user !== null) {
             UserService.username = user.username;
             UserService.isLogged = true;
             $scope.loggeduser = user;
@@ -42,7 +42,7 @@ feedUI.controller('authCtrl',function($scope,$http,$location,UserService,$timeou
             UserService.username = '';
         }
         
-    };
+    }
     
     // function getUser(){
     //     var user = {
@@ -82,7 +82,7 @@ feedUI.controller('authCtrl',function($scope,$http,$location,UserService,$timeou
    
     $scope.profile = function() {
         getCurrentUser(function(user) {
-            if (typeof user != 'undefined' && user !== null){
+            if (typeof user !== 'undefined' && user !== null){
                 console.log("Not Undefined: ",user);
                 $scope.loggeduser = user;           
             }else{
@@ -90,7 +90,7 @@ feedUI.controller('authCtrl',function($scope,$http,$location,UserService,$timeou
                 $location.path('/signin');
             }
         });
-    }
+    };
     
         $scope.logout = function(){
             console.log("logout");
@@ -105,7 +105,7 @@ feedUI.controller('authCtrl',function($scope,$http,$location,UserService,$timeou
  
             })
             .error(function() {
-                $scope.alert = 'Logout failed'
+                $scope.alert = 'Logout failed';
             });
     };
 
