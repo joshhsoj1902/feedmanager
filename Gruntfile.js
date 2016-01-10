@@ -5,6 +5,7 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON("package.json"),
     jshint: {
         options: {
+            jshintrc: '.jshintrc',
             curly: true,
             eqeqeq: true,
             immed: true,
@@ -46,6 +47,8 @@ module.exports = function(grunt) {
               "routes.js",
               "config.json",
               "components/**/*.js",
+              "public/js/*.js",
+              "public/js/**/*.js",
               "src/client/spa/**/*.js"
             ]
         }
