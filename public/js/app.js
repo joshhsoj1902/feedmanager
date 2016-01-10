@@ -1,4 +1,4 @@
-var feed = angular.module('feed', ['ngRoute', 'feedControllers']);
+var feed = angular.module('feed', ['ngRoute', 'feedUI']);
 
 feed.config(['$routeProvider', '$locationProvider',
   function($routeProvider, $locationProvider) {

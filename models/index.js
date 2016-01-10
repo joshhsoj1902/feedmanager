@@ -5,9 +5,10 @@ var path      = require('path');
 var Sequelize = require('sequelize');
 var basename  = path.basename(module.filename);
 var env       = process.env.NODE_ENV || 'development';
-console.log(__dirname);
-console.log("'/../sqconfig.json'");
-console.log(__dirname + '/../sqconfig.json');
+// console.log(basename);
+// console.log(__dirname);
+// console.log("'/../sqconfig.json'");
+// console.log(__dirname + '/../sqconfig.json');
 var config    = require(__dirname + '/../sqconfig.json')[env];
 var db        = {};
 

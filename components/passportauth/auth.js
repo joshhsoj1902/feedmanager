@@ -39,18 +39,6 @@ module.exports = function(app) {
                 //  return done(null, false, { message: 'Incorrect password.' });
                 //}
                 
-                
-                models.User.findById(user.id).then(function(err, user2) {
-                    console.log("FindById",JSON.stringify(user2, null, "    "))
-                });
-                models.User.find({
-                where: {
-                    id: user.id
-                   }
-                }).then(function(err, user3) {
-                    console.log("Find2",JSON.stringify(user3, null, "    "))
-                });
-                
                 return done(null, user);
             });
         }
@@ -63,7 +51,7 @@ module.exports = function(app) {
  
     passport.deserializeUser(function(id, done) {
         models.User.findById(id).then(function(user) {
-            console.log("deserializeUser",JSON.stringify(user, null, "    "))
+            console.log("deserializeUser",JSON.stringify(user, null, "    "));
              done(null, user);
         });
     });
