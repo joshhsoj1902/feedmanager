@@ -9,8 +9,8 @@ var config = require("./config.json"),
 	session = require('express-session'),
 	routes = require("./routes.js"),
     feedManager = require("./components/feed/feedManager.js"),
-    passportauth = require("./components/passportauth/index.js"),
-    passport = require('passport-google-oauth'),
+    //passportauth = require("./components/passportauth/index.js"),
+    //passport = require('passport-google-oauth'),
 	app = express();
     var flash = require('connect-flash');
 
@@ -70,11 +70,11 @@ console.log("App Starting");
        saveUninitialized: true
 	 }));
      
-     app.use(flash());
+     //app.use(flash());
 	
-	passport = passportauth.init(app);
-    app.use(passport.initialize());
-    app.use(passport.session());
+	//passport = passportauth.init(app);
+    //app.use(passport.initialize());
+    //app.use(passport.session());
 	
 	//app.use(app.router);
  
@@ -92,6 +92,13 @@ app.get('/rss',function(req, res) {
     feedManager.generateFeed(req,res);
 });
 
+    // app.get('/auth/currentuser',function(req, res) {
+    //     console.log("currentuser");
+    //     //feedManager.generateFeed(req,res);
+    // });
+
+require('./components/passportauth/auth')(app);
+
 		routes.load(app);
     
 
@@ -100,17 +107,17 @@ app.get('/rss',function(req, res) {
 		console.log("App listening on port: " + config.server.port);
 
         // process the signup form
-        app.post('/signup', passport.authenticate('local-signup', {
-            successRedirect : '/profile', // redirect to the secure profile section
-            failureRedirect : '/signup', // redirect back to the signup page if there is an error
-            failureFlash : true // allow flash messages
-        }));
+    //     app.post('/signup', passport.authenticate('local-signup', {
+    //         successRedirect : '/profile', // redirect to the secure profile section
+    //         failureRedirect : '/signup', // redirect back to the signup page if there is an error
+    //         failureFlash : true // allow flash messages
+    //     }));
 
-        app.post('/login',
-            passport.authenticate('local', { successRedirect: '/',
-                                           failureRedirect: '/login',
-                                           failureFlash: true })
-      );
+    //     app.post('/login',
+    //         passport.authenticate('local', { successRedirect: '/',
+    //                                        failureRedirect: '/login',
+    //                                        failureFlash: true })
+    //   );
       
     //  function isAuthenticated(req,res,next){
     //     if(req.isAuthenticated())return next();
@@ -120,15 +127,28 @@ app.get('/rss',function(req, res) {
     //   app.get('/auth/currentuser',isAuthenticated(),function(req,res){
     //     res.json(req.user);
     // });
+    
+    
+    
+    
+    
+    //Passport Auth
+    
+    
+
+    
+    
+    
+    
 
 
-function isLoggedIn(req, res, next) {
+// function isLoggedIn(req, res, next) {
 
-    // if user is authenticated in the session, carry on 
-        if (req.isAuthenticated()) {
-            return next();
-        }
+//     // if user is authenticated in the session, carry on 
+//         if (req.isAuthenticated()) {
+//             return next();
+//         }
         
-    // if they aren't redirect them to the home page
-    res.redirect('/');
-}
+//     // if they aren't redirect them to the home page
+//     res.redirect('/');
+// }

@@ -9,7 +9,7 @@
     </style>
 </head>
 <body>
-<div class="container">
+<div class="container" data-ng-init="profile()">
 
     <div class="page-header text-center">
         <h1><span class="fa fa-anchor"></span> Profile Page</h1>
@@ -24,9 +24,9 @@
                 <h3><span class="fa fa-user"></span> Local</h3>
 
                     <p>
-                        <strong>id</strong>: <%= user._id %><br>
-                        <strong>email</strong>: <%= user.local.email %><br>
-                        <strong>password</strong>: <%= user.local.password %>
+                        <!--<strong>id</strong>: <%= user._id %><br>-->
+                        <strong>username</strong>: {{loggeduser.username}}<br>
+                        <!--<strong>password</strong>: <%= user.local.password %>-->
                     </p>
 
             </div>
