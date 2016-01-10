@@ -45,7 +45,6 @@ module.exports = function(grunt) {
               "server.js",
               "routes.js",
               "config.json",
-              "libs/**/*.js",
               "components/**/*.js",
               "src/client/spa/**/*.js"
             ]
