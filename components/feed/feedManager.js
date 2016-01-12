@@ -52,13 +52,13 @@
 					feedManagerLocal.handlePosts(lFeedHeader,lPosts,sendFeedResponse);
 				}
 				
-				if (typeof req._passport.session !== 'undefined' && req._passport.session){
-					if (req._passport.session.user !== 'undefined') {
-						if (req._passport.session.user.url_key !== 'undefined') {
-							console.log(req._passport.session.user.url_key);
-						}
-					}
-				}
+				// if (typeof req._passport.session !== 'undefined' && req._passport.session){
+				// 	if (req._passport.session.user !== 'undefined') {
+				// 		if (req._passport.session.user.url_key !== 'undefined') {
+				// 			console.log(req._passport.session.user.url_key);
+				// 		}
+				// 	}
+				// }
 				
 				var feedHeader = {
 						feedDetails: {
