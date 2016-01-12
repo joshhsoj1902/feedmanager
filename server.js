@@ -50,7 +50,7 @@ console.log("App Starting");
 	//causes runtime errors for me...
 	//app.use(methodOverride);
 	
-	app.use(express["static"](config.server.public_dir));
+	app.use(express.static(config.server.public_dir));
 	
 	app.use(bodyParser.json());
 	app.use(bodyParser.urlencoded({

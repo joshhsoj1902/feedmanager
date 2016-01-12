@@ -53,7 +53,7 @@
 					feedHeader.feedDetails.categories	= meta.categories;
 					
 					
-					while (post = this.read()) {
+					while (post == this.read()) {
 											
 						var outputPost = {
 				         "title":		post.title,
