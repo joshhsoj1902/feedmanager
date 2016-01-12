@@ -9,10 +9,7 @@ var config = require("./config.json"),
 	session = require('express-session'),
 	routes = require("./routes.js"),
     feedManager = require("./components/feed/feedManager.js"),
-    //passportauth = require("./components/passportauth/index.js"),
-    //passport = require('passport-google-oauth'),
 	app = express();
-    var flash = require('connect-flash');
 
 config.server.port = process.env.PORT || config.server.port;
 config.server.public_dir = process.env.PUBLIC_DIR || config.server.public_dir;
