@@ -1,6 +1,6 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
-  var googleAccount = sequelize.define('googleAccount', {
+  var googleAccount = sequelize.define('GoogleAccount', {
     token: DataTypes.STRING,
     name: DataTypes.STRING,
     email: DataTypes.STRING,

@@ -32,7 +32,7 @@
                                 }
                                 
                                 console.log(JSON.stringify(user, null, "    "));
-							    console.log(user.url_key);
+							    console.log(user.urlKey);
                                 
                                 //TODO reenable passwords?
                                 //if (!user.validPassword(password)) {
@@ -102,7 +102,7 @@
                     
                     models.User.create({
                                 username: username,
-                                url_key: "NotMonkey"
+                                urlKey: "NotMonkey"
                                 //newUser.local.password = newUser.generateHash(password);
                                 }).then(function(user) {
                                     console.log(JSON.stringify(user, null, "    "));

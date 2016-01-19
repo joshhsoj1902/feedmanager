@@ -35,7 +35,6 @@ module.exports = function(app) {
                 }
                 
                 console.log("Login",JSON.stringify(user, null, "    "));
-                //console.log(user.url_key);
                 
                 //TODO reenable passwords?
                 //if (!user.validPassword(password)) {
@@ -84,7 +83,7 @@ module.exports = function(app) {
         
         models.User.create({
                                 username: req.body.username,
-                                url_key: "NotMonkey"
+                                urlKey: "NotMonkey"
                                 //newUser.local.password = newUser.generateHash(password);
                                 }).then(function(user) {
                                     console.log(JSON.stringify(user, null, "    "));
@@ -156,7 +155,7 @@ module.exports = function(app) {
                     // if the user isnt in our database, create a new user
                     models.User.create({
                         username: profile.id,
-                        url_key: "NotMonkeyG"
+                        urlKey: "NotMonkeyG"
                         
                         
                         
