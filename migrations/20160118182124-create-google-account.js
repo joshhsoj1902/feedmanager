@@ -1,12 +1,15 @@
 'use strict';
 module.exports = {
   up: function(queryInterface, Sequelize) {
-    return queryInterface.createTable('googleAccounts', {
+    return queryInterface.createTable('GoogleAccounts', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
+      },
+      profileId: {
+        type:   Sequelize.STRING
       },
       token: {
         type: Sequelize.STRING
@@ -35,6 +38,6 @@ module.exports = {
     });
   },
   down: function(queryInterface, Sequelize) {
-    return queryInterface.dropTable('googleAccounts');
+    return queryInterface.dropTable('GoogleAccounts');
   }
 };

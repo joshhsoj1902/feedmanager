@@ -3,10 +3,10 @@
 module.exports = {
   up: function (queryInterface, Sequelize) {
       
-      queryInterface.renameTable('googleAccounts', 'GoogleAccount')
+      //queryInterface.renameTable('googleAccounts', 'GoogleAccounts')
       //queryInterface.renameTable('Users', 'User')
       
-      queryInterface.renameColumn('Users', 'url_key', 'urlKey')
+      //queryInterface.renameColumn('Users', 'url_key', 'urlKey')
       
       
     /*
@@ -19,10 +19,10 @@ module.exports = {
   },
 
   down: function (queryInterface, Sequelize) {
-      queryInterface.renameTable('GoogleAccount', 'googleAccounts')
+      //queryInterface.renameTable('GoogleAccount', 'googleAccounts')
       //queryInterface.renameTable('User', 'Users')
       
-      queryInterface.renameColumn('Users', 'urlKey', 'url_key')
+      //queryInterface.renameColumn('Users', 'urlKey', 'url_key')
       
     /*
       Add reverting commands here.

@@ -11,7 +11,11 @@ module.exports = {
       username: {
         type: Sequelize.STRING
       },
-      url_key: {
+      firstName: 
+        {
+            type: Sequelize.STRING
+        },
+      urlKey: {
         type: Sequelize.STRING
       },
       createdAt: {
