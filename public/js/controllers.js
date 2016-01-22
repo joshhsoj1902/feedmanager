@@ -13,18 +13,22 @@ feedUI.controller('authCtrl',function($scope,$http,$location,UserService,$timeou
     
     $scope.user  = {username:'',password:''};
     $scope.alert = '';
-    $scope.isUserLoggedIn = false;
+    //$scope.isUserLoggedIn = false;
     console.log("authControl");
     console.log("UserService",UserService);
+    
+
     
     function getCurrentUser(done){
         $http.get('/auth/currentuser').
             success(function (data) {
                 console.log("getCurrentUser success");
+                setUser(data);
                 done(data);
             }).
             error(function () {
                 console.log("getCurrentUser fail");
+                setUser(null);
                 done(null);
             });
     }
@@ -32,59 +36,64 @@ feedUI.controller('authCtrl',function($scope,$http,$location,UserService,$timeou
     function setUser(user){
         if (typeof user !== 'undefined' && user !== null) {
             UserService.username = user.username;
+
             UserService.isLogged = true;
-            $scope.loggeduser = user;
-            $scope.isUserLoggedIn = true;
+            $scope.user.username = UserService.username;
+            //$scope.loggeduser = user;
+            //$scope.isUserLoggedIn = true;
+            console.log("user set:",user);
         }else{
-            $scope.loggeduser = null;
-            $scope.isUserLoggedIn = false;
+            $scope.user = null;
+            //$scope.isUserLoggedIn = false;
             UserService.isLogged = false;
             UserService.username = '';
         }
         
     }
     
-    // function getUser(){
-    //     var user = {
-    //         username : UserService.username
-    //     }
-    //     return 
+     $scope.isUserLoggedIn = function(){
+         console.log(UserService.isLogged);
+         console.log($scope.user);
+         if (UserService.isLogged) {
+                      $scope.user.username = UserService.username;
+         }
+
+        return UserService.isLogged;
+    }
+    
+    // $scope.login = function(user){
+    //     console.log("login");
+    //     $http.post('/auth/login', user).
+    //         success(function(data) {
+    //             setUser(data);
+    //             $location.path('/profile');
+    //         }).
+    //         error(function() {
+    //             $scope.alert = 'Login failed';
+    //             setUser(null);
+    //         });
+ 
     // };
     
-    
-    $scope.login = function(user){
-        console.log("login");
-        $http.post('/auth/login', user).
-            success(function(data) {
-                setUser(data);
-                $location.path('/profile');
-            }).
-            error(function() {
-                $scope.alert = 'Login failed';
-                setUser(null);
-            });
+    // $scope.signup = function(user){
+    //     $http.post('/auth/signup', user).
+    //         success(function(data) {
+    //             $scope.alert = data.alert;
+    //          }).
+    //         error(function() {
+    //             $scope.alert = 'Registration failed';
+    //             // $scope.isUserLoggedIn = false;
+    //             // UserService.isLogged = false;
+    //             // UserService.username = '';
+    //         });
  
-    };
-    
-    $scope.signup = function(user){
-        $http.post('/auth/signup', user).
-            success(function(data) {
-                $scope.alert = data.alert;
-             }).
-            error(function() {
-                $scope.alert = 'Registration failed';
-                // $scope.isUserLoggedIn = false;
-                // UserService.isLogged = false;
-                // UserService.username = '';
-            });
- 
-    };
+    // };
    
     $scope.profile = function() {
         getCurrentUser(function(user) {
             if (typeof user !== 'undefined' && user !== null){
                 console.log("Not Undefined: ",user);
-                $scope.loggeduser = user;           
+                $scope.user = user;           
             }else{
                 console.log("Undefined: ",user);
                 $location.path('/signin');

@@ -46,21 +46,20 @@
       <div id="navbar" class="navbar-collapse collapse" ng-controller="authCtrl">
         <!--<form class="navbar-form navbar-right" action='/login' method='post'>-->
         <form id="loginform" class="navbar-form navbar-right" role="form"
-         ng-show="!isUserLoggedIn">
-          <div class="form-group">
+         ng-show="!isUserLoggedIn()">
+          <!--<div class="form-group">
             <input type="text" placeholder="Email" name="username" class="form-control" ng-model="user.username">
           </div>
           <div class="form-group">
             <input type="password" placeholder="Password" name="password" class="form-control" ng-model="user.password">
           </div>
           <a id="btn-login"   class="btn btn-success" ng-click="login(user)">Login  </a>
-          <!--<button type="submit" class="btn btn-success" ng-click="login(user)">Sign in</button>-->
-          <a href="/signup" class="btn btn-primary">Signup</a>
+          <a href="/signup" class="btn btn-primary">Signup</a>-->
           <a href="/auth/google" class="btn btn-danger" target="_self"><span class="fa fa-google-plus"></span> Google</a>
         </form>
-        <form class="navbar-form navbar-right" role="form" ng-show="isUserLoggedIn">
+        <form class="navbar-form navbar-right" role="form" ng-show="isUserLoggedIn()">
             <p class="text-primary">
-                <strong>Username</strong>: {{loggeduser.username}}
+                <strong>Username</strong>: {{user.username}}
                 <a id="btn-logout"   class="btn btn-success" ng-click="logout()">Logout  </a>
             </p>
         </form>
