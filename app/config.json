@@ -1,0 +1,18 @@
+{
+	"server": {
+		"port": 5000,
+		"public_dir": "public"
+	},
+	"dbs": {
+		"sampleUsers": {
+			"type": "mock",
+			"url": "file:./sampleUsers.db"
+		}
+	},
+	"reddit": {
+		"app_id": "aBtS0RUMPqqa8g",
+		"app_secret": "lJUh_WtoPA-NnZ851rz2JToeZbM",
+		"bot_username": "joshhsoj1902BOT",
+		"bot_password": "6Vki7508C=81W1v "
+	}
+}

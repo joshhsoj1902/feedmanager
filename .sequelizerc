@@ -1,8 +1,0 @@
-var path = require('path');
-
-module.exports = {
-  'config': path.resolve('.', 'sqconfig.json'),
-  'migrations-path': path.resolve('.', 'migrations'),
-  'models-path': path.resolve('.', 'models'),
-  'seeders-path': path.resolve('.', 'seeders')
-}
