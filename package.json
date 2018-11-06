@@ -27,7 +27,7 @@
     "express": "4.7.4",
     "express-handlebars": "2.0.1",
     "express-session": "1.15.6",
-    "feed": "0.2.6",
+    "feed": "0.3.1",
     "feedparser": "1.1.6",
     "handlebars": "4.0.12",
     "method-override": "2.3.10",
