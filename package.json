@@ -31,7 +31,7 @@
     "feedparser": "1.1.6",
     "handlebars": "4.0.12",
     "method-override": "2.3.10",
-    "morgan": "1.2.3",
+    "morgan": "1.9.1",
     "pg": "4.5.7",
     "pg-hstore": "2.3.2",
     "raw.js": "0.6.0",
